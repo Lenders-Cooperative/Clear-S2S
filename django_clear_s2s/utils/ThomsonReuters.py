@@ -1,5 +1,6 @@
 import requests
 import requests_pkcs12
+import pprint
 import xmltodict
 import datetime
 from requests.packages.urllib3.util.retry import Retry
@@ -21,7 +22,8 @@ class ThomsonReuters(SOAPHandlerBase):
         'BusinessSearch': 'django_clear_s2s/BusinessSearchRequest.xml',
         'EIDVPersonSearch': 'django_clear_s2s/EIDVPersonSearch.xml',
         'PersonQuickAnalysisFlagRequest': 'django_clear_s2s/PersonQuickAnalysisFlagRequest.xml',
-        'CompanyQuickAnalysisFlagRequest': 'django_clear_s2s/CompanyQuickAnalysisFlagRequest.xml'
+        'CompanyQuickAnalysisFlagRequest': 'django_clear_s2s/CompanyQuickAnalysisFlagRequest.xml',
+        'WebAndSocialMediaSearchRequest': 'django_clear_s2s/WebAndSocialMediaSearchRequest.xml'
     }
 
 
@@ -32,9 +34,12 @@ class ThomsonReuters(SOAPHandlerBase):
             status_forcelist=[429, 500, 502, 503, 504],
             method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"]
         )
-        self.adapter = HTTPAdapter(max_retries=retry_strategy)
-        self.http = requests.Session()
-        self.base_url = settings.TR_CLEAR_S2S_HOST
+        if not getattr(settings, 'TR_CLEAR_S2S_USER', None):
+            self.adapter = HTTPAdapter(max_retries=retry_strategy)
+            self.http = requests.Session()
+            self.base_url = settings.TR_CLEAR_S2S_HOST
+            self.auth = None
+            self.auth = HTTPBasicAuth(settings.TR_CLEAR_S2S_USER, settings.TR_CLEAR_S2S_PASS)
 
         self.authenticate()
     
@@ -93,6 +98,8 @@ class ThomsonReuters(SOAPHandlerBase):
             self.TEMPLATES['PersonSearch'], 
             {**kwargs, 'url': self.base_url + '/v2/person/searchResults'}
         )
+        print(response1)
+        
         response2 = None
         url = response1.find('ns2:PersonResults').get('Uri')
         if url != None:
@@ -146,6 +153,12 @@ class ThomsonReuters(SOAPHandlerBase):
         return (response1, response2)
     
     def social_media_search(self, **kwargs):
-        response1 = self.post()
+        response1 = self.post(
+            self.TEMPLATES['WebAndSocialMediaSearchRequest'],
+            {**kwargs, 'url': self.base_url + '/v2/webandsocialmedia/searchResults'}
+        )
         response2 = None
+        url = response1.find('ns2:WebAndSocialMediaSearchResults').get('Uri')
+        if url != None:
+            response2 = self.get_results(url)
         return (response1, response2)

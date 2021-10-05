@@ -114,3 +114,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+TR_CLEAR_S2S_CLIENT_ID = 'hNzAyQMbmhCWNYABWQAtZgV35C214ycb'
+TR_CLEAR_S2S_CLIENT_SECRET = 'W9Iv5v6io8dhp6Ux'
+TR_CLEAR_S2S_SCOPES = 'https://api.thomsonreuters.com/auth/clear.s2s.sandbox.read'
+TR_CLEAR_S2S_HOST = 'https://api.thomsonreuters.com/s2s-sandbox'
+TR_CLEAR_S2S_USER = None
+TR_CLEAR_S2S_PASS = None

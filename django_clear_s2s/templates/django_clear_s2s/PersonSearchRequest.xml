@@ -35,20 +35,22 @@
 			<AddressInfo>
 				<StreetNamesSoundSimilarOption>false</StreetNamesSoundSimilarOption>
                 {% if street %}
-                    <Street>{street}</Street>
+                    <Street>{{street}}</Street>
                 {% endif %}
                 {% if city %}
-                    <City>{city}</City>
+                    <City>{{city}}</City>
                 {% endif %}
                 {% if state %}
-                    <State>{state}</State>
+                    <State>{{state}}</State>
                 {% endif %}
                 {% if zip_code %}
-                    <ZipCode>{zip_code}</ZipCode>
+                    <ZipCode>{{zip_code}}</ZipCode>
                 {% endif %}
 			</AddressInfo>
 			<EmailAddress/>
-			<NPINumber/>
+			{% if npi_number %}
+                <NPINumber>{{ npi_number }}</NPINumber>
+            {% endif %}
             {% if ssn %}
                 <SSN>{{ ssn }}</SSN>
             {% endif %}
