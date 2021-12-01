@@ -8,7 +8,7 @@
 ### Installing
 
 ```
-pip install django-clear-s2s
+pip install clear-s2s
 ```
 
 ```python
