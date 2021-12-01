@@ -9,24 +9,24 @@
     <Criteria>
         <b1:BusinessCriteria xmlns:b1="com/thomsonreuters/schemas/search">
             <CompanyEntityId></CompanyEntityId>
-            {% if business_name %}
+            {% if business_name is defined %}
                 <BusinessName>{{ business_name }}</BusinessName>
             {% endif %}
             <CorporationInfo>
-                {% if corporation_id %}
-                    <CorporationId>{corporation_id}</CorporationId>
+                {% if corporation_id is defined %}
+                    <CorporationId>{{corporation_id}}</CorporationId>
                 {% endif %}
-                {% if filing_number %}
-                    <FilingNumber>{filing_number}</FilingNumber>
+                {% if filing_number is defined %}
+                    <FilingNumber>{{filing_number}}</FilingNumber>
                 {% endif %}
-                {% if filing_date %}
-                    <FilingDate>{filing_date}</FilingDate>
+                {% if filing_date is defined %}
+                    <FilingDate>{{filing_date}}</FilingDate>
                 {% endif %}
-                {% if fein %}
-                    <FEIN>{fein}</FEIN>
+                {% if fein is defined %}
+                    <FEIN>{{fein}}</FEIN>
                 {% endif %}
-                {% if duns_number %}
-                    <DUNSNumber>{duns_number}</DUNSNumber>
+                {% if duns_number is defined %}
+                    <DUNSNumber>{{duns_number}}</DUNSNumber>
                 {% endif %}
             </CorporationInfo>
             <NPINumber></NPINumber>
@@ -37,35 +37,35 @@
                     <FirstNameSoundSimilarOption>false</FirstNameSoundSimilarOption>
                     <FirstNameVariationsOption>false</FirstNameVariationsOption>
                 </AdvancedNameSearch>
-                {% if last_name %}
+                {% if last_name is defined %}
                     <LastName>{{ last_name }}</LastName>
                 {% endif %}
-                {% if first_name %}
+                {% if first_name is defined %}
                     <FirstName>{{ first_name }}</FirstName>
                 {% endif %}
-                {% if middle_initial %}
+                {% if middle_initial is defined %}
                     <MiddleInitial>{{ middle_initial }}</MiddleInitial>
                 {% endif %}
-                {% if secondary_last_name %}
+                {% if secondary_last_name is defined %}
                     <SecondaryLastName>{{ secondary_last_name }}</SecondaryLastName>
                 {% endif %}
             </NameInfo>
             <AddressInfo>
                 <StreetNamesSoundSimilarOption>false</StreetNamesSoundSimilarOption>
-                {% if street %}
-                    <Street>{street}</Street>
+                {% if street is defined %}
+                    <Street>{{street}}</Street>
                 {% endif %}
-                {% if city %}
-                    <City>{city}</City>
+                {% if city is defined %}
+                    <City>{{city}}</City>
                 {% endif %}
-                {% if state %}
-                    <State>{state}</State>
+                {% if state is defined %}
+                    <State>{{state}}</State>
                 {% endif %}
-                {% if zip_code %}
-                    <ZipCode>{zip_code}</ZipCode>
+                {% if zip_code is defined %}
+                    <ZipCode>{{zip_code}}</ZipCode>
                 {% endif %}
             </AddressInfo>
-            {% if phone_number %}
+            {% if phone_number is defined %}
                 <PhoneNumber>{{ phone_number }}</PhoneNumber>
             {% endif %}
         </b1:BusinessCriteria>

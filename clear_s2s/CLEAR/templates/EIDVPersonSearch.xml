@@ -19,40 +19,40 @@
         <UserReference>CLEAR ID Confirm Person Search 8</UserReference>
         <UserReference>CLEAR ID Confirm Person Search 9</UserReference>
         <Criteria>
-            {% if first_name %}
+            {% if first_name is defined %}
                 <FirstName>{{ first_name }}</FirstName>
             {% endif %}
             
-            {% if last_name %}
+            {% if last_name is defined %}
                 <LastName>{{ last_name }}</LastName>
             {% endif %}
 
-            {% if dob %}
+            {% if dob is defined %}
                 <BirthDate><Day>01</Day><Month>01</Month><Year>1951</Year></BirthDate>
             {% endif %}
 
-            {% if ssn %}
+            {% if ssn is defined %}
                 <SSN>{{ ssn }}</SSN>
             {% endif %}
             
-            {% if street %}
-                <Street>{street}</Street>
+            {% if street is defined %}
+                <Street>{{street}}</Street>
             {% endif %}
-            {% if city %}
-                <City>{city}</City>
+            {% if city is defined %}
+                <City>{{city}}</City>
             {% endif %}
-            {% if state %}
-                <State>{state}</State>
+            {% if state is defined %}
+                <State>{{state}}</State>
             {% endif %}
-            {% if zip_code %}
-                <ZipCode>{zip_code}</ZipCode>
+            {% if zip_code is defined %}
+                <ZipCode>{{zip_code}}</ZipCode>
             {% endif %}
 
-            {% if phone_number %}
-                <PhoneNumber>{phone_number}</PhoneNumber>
+            {% if phone_number is defined %}
+                <PhoneNumber>{{phone_number}}</PhoneNumber>
             {% endif %}
                         
-            {% if npi_number %}
+            {% if npi_number is defined %}
                 <NPINumber>{{ npi_number }}</NPINumber>
             {% endif %}
         </Criteria>
